@@ -19,10 +19,9 @@
 -- Table structure for table `all_program_information`
 --
 
-DROP TABLE IF EXISTS `all_program_information`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
  SET character_set_client = utf8 ;
-CREATE TABLE `all_program_information` (
+CREATE TABLE `time_shift`.`all_program_information` (
   `program_id` int(11) NOT NULL,
   `program_name` varchar(50) NOT NULL,
   `channel` varchar(50) NOT NULL,
@@ -41,18 +40,3 @@ CREATE TABLE `all_program_information` (
 -- Dumping data for table `all_program_information`
 --
 
-LOCK TABLES `all_program_information` WRITE;
-/*!40000 ALTER TABLE `all_program_information` DISABLE KEYS */;
-/*!40000 ALTER TABLE `all_program_information` ENABLE KEYS */;
-UNLOCK TABLES;
-/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
-
-/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
-/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
-/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
-/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
-
--- Dump completed on 2018-08-31 14:59:13

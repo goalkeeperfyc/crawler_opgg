@@ -19,10 +19,10 @@
 -- Table structure for table `result_rating`
 --
 
-DROP TABLE IF EXISTS `result_rating`;
+
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
  SET character_set_client = utf8 ;
-CREATE TABLE `result_rating` (
+CREATE TABLE `time_shift`.`result_rating` (
   `id` int(11) NOT NULL,
   `live_rating` varchar(45)  DEFAULT NULL,
   `time_shift_rating` varchar(45)  DEFAULT NULL,

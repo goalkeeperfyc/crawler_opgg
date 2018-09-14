@@ -18,11 +18,10 @@
 --
 -- Table structure for table `first_play_parallel_machine`
 --
-
-DROP TABLE IF EXISTS `first_play_parallel_machine`;
+history_recordhistory_record
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
  SET character_set_client = utf8 ;
-CREATE TABLE `first_play_parallel_machine` (
+CREATE TABLE `time_shift`.`first_play_parallel_machine` (
   `id` int(11) NOT NULL,
   `is_first_play` tinyint(4) DEFAULT NULL,
   `is_parallel_machine` tinyint(4) DEFAULT NULL,
@@ -41,18 +40,3 @@ CREATE TABLE `first_play_parallel_machine` (
 -- Dumping data for table `first_play_parallel_machine`
 --
 
-LOCK TABLES `first_play_parallel_machine` WRITE;
-/*!40000 ALTER TABLE `first_play_parallel_machine` DISABLE KEYS */;
-/*!40000 ALTER TABLE `first_play_parallel_machine` ENABLE KEYS */;
-UNLOCK TABLES;
-/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
-
-/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
-/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
-/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
-/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
-
--- Dump completed on 2018-08-31 14:59:14
