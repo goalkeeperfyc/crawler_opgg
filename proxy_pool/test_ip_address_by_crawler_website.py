@@ -8,7 +8,7 @@ Created on Tue Sep 18 23:14:06 2018
 
 import requests
 from bs4 import BeautifulSoup
-from crawler_sys.proxy_pool import connect_with_database
+from crawler_opgg.proxy_pool.connect_with_database import connect_with_database
 
 proxy_lst = connect_with_database.extract_data_to_use()
 
