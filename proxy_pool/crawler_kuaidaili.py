@@ -10,7 +10,8 @@ import time
 import requests
 import datetime
 from bs4 import BeautifulSoup
-from crawler_sys.proxy_pool import connect_with_database
+from crawler_opgg.utils.connect_with_database import write_dic_into_database
+
 
 def kuaidaili(max_page=20):
     """
@@ -33,11 +34,12 @@ def kuaidaili(max_page=20):
             ip_dic['create_time'] = create_time
             ip_dic['test_or_not'] = 0
             ip_dic['source'] = 'kuaidaili'
-            connect_with_database.write_dic_into_database(data_dic=ip_dic,
-                                                          table_name='ip_address')
+            write_dic_into_database(data_dic=ip_dic, table_name='ip_address')
         print('finished page %s' % page_num)
         page_num += 1
         time.sleep(5)
 
+
 if __name__ == '__main__':
     kuaidaili(max_page=30)
+    

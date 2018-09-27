@@ -8,8 +8,8 @@ Created on Tue Sep 18 13:40:51 2018
 
 
 import requests
-from crawler_opgg.proxy_pool.connect_with_database import extract_data_to_test
-from crawler_opgg.proxy_pool.connect_with_database import update_status
+from crawler_opgg.utils.connect_with_database import extract_data_to_test
+from crawler_opgg.utils.connect_with_database import update_status
 
 
 def test_ip():
