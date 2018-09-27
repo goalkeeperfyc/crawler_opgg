@@ -10,6 +10,10 @@ import requests
 from requests.packages.urllib3.connectionpool import HTTPConnectionPool
 
 def _make_request(self, conn, method, url, **kwargs):
+    """
+    copy from stack overflow
+    this is a function to determine the ip address when requesting url
+    """
     response = self._old_make_request(conn, method, url, **kwargs)
     sock = getattr(conn, 'sock', False)
     if sock:
