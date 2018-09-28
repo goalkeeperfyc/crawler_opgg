@@ -19,10 +19,9 @@
 -- Table structure for table `proxy_pool`
 --
 
-DROP TABLE IF EXISTS `proxy_pool`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `proxy_pool` (
+CREATE TABLE `proxy_pool`.`proxy_pool` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `ip_address` varchar(45) DEFAULT NULL,
   `port` varchar(45) DEFAULT NULL,

@@ -19,7 +19,7 @@
 -- Table structure for table `user_info`
 --
 
-DROP TABLE IF EXISTS `user_info`;
+
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
  SET character_set_client = utf8mb4 ;
 CREATE TABLE `crawler_opgg`.`user_info` (

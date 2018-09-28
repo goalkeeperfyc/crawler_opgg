@@ -19,10 +19,10 @@
 -- Table structure for table `whether_cheat`
 --
 
-DROP TABLE IF EXISTS `whether_cheat`;
+
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
  SET character_set_client = utf8mb4 ;
-CREATE TABLE `whether_cheat` (
+CREATE TABLE `crawler_opgg`.`whether_cheat` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `judge_cheat` int(11) DEFAULT NULL,
   `account_existance` int(11) DEFAULT NULL,
