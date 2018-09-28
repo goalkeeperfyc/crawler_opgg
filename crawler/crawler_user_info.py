@@ -5,8 +5,23 @@ Created on Sun Sep  9 21:50:59 2018
 @author: fangyucheng
 """
 
+
+from bs4 import BeautifulSoup
 from crawler_opgg.utils.retry_get_url import retry_get_url
 
+
+def get_match_id(user_home_page):
+    result_lst = []
+    get_page = retry_get_url(user_home_page)
+    get_page.encoding = 'utf-8'
+    page = get_page.text
+    soup = BeautifulSoup(page, 'html.parser')
+    match_lst = soup.find_all('li', {'data-selector': 'total-played-game-item'})
+    for line in match_lst:
+        match_id = line.find('div', {'class': 'matches-item__column matches-item__column--team'}).div['data-u-id']
+        result_lst.append(match_id)
+    return result_lst
+  
 
 def process_one_line(page_cate, process_dic):
     user_info = {}
