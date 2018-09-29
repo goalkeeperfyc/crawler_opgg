@@ -18,7 +18,7 @@ def output_result(result_lst,
                   file_name=None):
 
     if output_to_mysql is True and table_name is not None:
-        write_lst_into_database(result_lst=result_lst,
+        write_lst_into_database(data_lst=result_lst,
                                 database_name=database_name,
                                 table_name=table_name)
 

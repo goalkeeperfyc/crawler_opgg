@@ -5,13 +5,21 @@ Created on Sun Sep  9 21:50:59 2018
 @author: fangyucheng
 """
 
-
+import datetime
 from bs4 import BeautifulSoup
 from crawler_opgg.utils.retry_get_url import retry_get_url
+from crawler_opgg.utils.output_result import output_result
 
 
-def get_match_id(user_home_page):
+def get_season():
+    return datetime.datetime.strftime(datetime.datetime.now(), '%Y-%m')
+
+
+def match_id(user_name,
+             table_name='match_info'):
     result_lst = []
+    season = get_season()
+    user_home_page = 'https://pubg.op.gg/user/' + user_name + '?server=pc-as'
     get_page = retry_get_url(user_home_page)
     get_page.encoding = 'utf-8'
     page = get_page.text
@@ -19,9 +27,59 @@ def get_match_id(user_home_page):
     match_lst = soup.find_all('li', {'data-selector': 'total-played-game-item'})
     for line in match_lst:
         match_id = line.find('div', {'class': 'matches-item__column matches-item__column--team'}).div['data-u-id']
-        result_lst.append(match_id)
+        create_time = datetime.datetime.strftime(datetime.datetime.now(), 
+                                                 '%Y-%m-%d %H:%M:%S')
+        match_info = {'create_time': create_time,
+                      'match_id': match_id,
+                      'season': season,
+                      'used': 0}
+        result_lst.append(match_info)
+        if len(result_lst) >= 100:
+            output_result(result_lst=result_lst,
+                          table_name=table_name)
+            result_lst.clear()
+    if len(result_lst) != []:
+        output_result(result_lst,
+                      table_name=table_name)
     return result_lst
-  
+
+
+def get_user_id(user_home_page):
+    get_page = retry_get_url(user_home_page)
+    get_page.encoding = 'utf-8'
+    page = get_page.text
+    soup = BeautifulSoup(page, 'html.parser')
+    user_id = soup.find('div', {'id': 'userNickname'})['data-user_id']
+    return user_id
+
+
+def user_info(match_id,
+              table_name='user_info',
+              host='localhost'):
+    result_lst = []
+    url = 'https://pubg.op.gg/api/matches/' + match_id
+    get_page = retry_get_url(url)
+    page_dic = get_page.json()
+    user_info_lst = page_dic['teams']
+    for line in user_info_lst:
+        user_lst = line['participants']
+        for line in user_lst:
+            user_name = line['user']['nickname']
+            user_home_page = line['user']['profile_url']
+            user_id = get_user_id(user_home_page)
+            create_time = datetime.datetime.strftime(datetime.datetime.now(), 
+                                                     '%Y-%m-%d %H:%M:%S')
+            user_info_dic = {'user_name': user_name,
+                             'user_id': user_id,
+                             'create_time': create_time}
+            result_lst.append(user_info_dic)
+
+    if result_lst != []:
+        output_result(result_lst,
+                      table_name=table_name,
+                      host=host)
+    return result_lst
+
 
 def process_one_line(page_cate, process_dic):
     user_info = {}
@@ -37,7 +95,7 @@ def process_one_line(page_cate, process_dic):
     return user_info
 
 
-def user_info(user_id,
+def user_performance(user_id,
               season='2018-09',
               server='pc-as',
               mode='tpp'):
@@ -77,3 +135,4 @@ def user_info(user_id,
         square_dic = {}
     user_info_dic = dict(solo_double_dic, **square_dic)
     return user_info_dic
+

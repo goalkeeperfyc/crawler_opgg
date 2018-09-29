@@ -90,7 +90,7 @@ def update_status(record_id,
     print('success commit record_id=%s' % record_id)
 
 
-def write_lst_into_database(data_lst, table_name, database_name='crawler',
+def write_lst_into_database(data_lst, table_name, database_name='crawler_opgg',
                             host='localhost', user='root', passwd='goalkeeper@1'):
     """
     write list into mysql database
