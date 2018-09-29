@@ -21,14 +21,14 @@
 
 
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+ SET character_set_client = utf8 ;
 CREATE TABLE `crawler_opgg`.`user_info` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `user_name` varchar(45) DEFAULT NULL,
   `user_id` varchar(45) DEFAULT NULL,
   `create_time` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB ;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
