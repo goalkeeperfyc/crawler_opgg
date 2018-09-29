@@ -9,4 +9,5 @@ Created on Sat Sep 29 09:59:35 2018
 
 from crawler_opgg.crawler.crawler_user_info import match_id
 
-match_id(user_name='goalkeeperfyc')
+match_id(user_name='goalkeeperfyc',
+         table_name='match_info')

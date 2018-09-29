@@ -21,12 +21,13 @@
 
 Drop table if exists `crawler_opgg`.`match_info`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+ SET character_set_client = utf8 ;
 CREATE TABLE `crawler_opgg`.`match_info` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `match_id` varchar(300) DEFAULT NULL,
   `create_time` datetime DEFAULT NULL,
   `season` varchar(45) DEFAULT NULL,
+  `used` int DEFAULT NULL, 
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;

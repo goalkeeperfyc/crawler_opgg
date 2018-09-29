@@ -72,6 +72,7 @@ def user_info(match_id,
             user_info_dic = {'user_name': user_name,
                              'user_id': user_id,
                              'create_time': create_time}
+            print('got user_info %s' % user_name)
             result_lst.append(user_info_dic)
 
     if result_lst != []:
