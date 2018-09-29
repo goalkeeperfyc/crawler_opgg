@@ -15,12 +15,14 @@ def output_result(result_lst,
                   database_name='crawler_opgg',
                   table_name='user_info',
                   output_to_file=False,
-                  file_name=None):
+                  file_name=None,
+                  host='localhost'):
 
     if output_to_mysql is True and table_name is not None:
         write_lst_into_database(data_lst=result_lst,
                                 database_name=database_name,
-                                table_name=table_name)
+                                table_name=table_name,
+                                host=host)
 
     if output_to_file is True and file_name is not None:
         dic_lst_to_file(lst_name=result_lst,
