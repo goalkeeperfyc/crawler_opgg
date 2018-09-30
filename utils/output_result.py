@@ -16,7 +16,7 @@ def output_result(result_lst,
                   table_name='user_info',
                   output_to_file=False,
                   file_name=None,
-                  host='localhost'):
+                  host='172.21.0.17'):
 
     if output_to_mysql is True and table_name is not None:
         write_lst_into_database(data_lst=result_lst,

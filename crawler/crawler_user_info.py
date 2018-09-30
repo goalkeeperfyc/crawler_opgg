@@ -17,7 +17,8 @@ def get_season():
 
 
 def match_id(user_name,
-             table_name='match_info'):
+             table_name='match_info',
+             host='172.21.0.17'):
     result_lst = []
     season = get_season()
     user_home_page = 'https://pubg.op.gg/user/' + user_name + '?server=pc-as'
@@ -37,11 +38,13 @@ def match_id(user_name,
         result_lst.append(match_info)
         if len(result_lst) >= 100:
             output_result(result_lst=result_lst,
-                          table_name=table_name)
+                          table_name=table_name,
+                          host='172.21.0.17')
             result_lst.clear()
     if len(result_lst) != []:
         output_result(result_lst,
-                      table_name=table_name)
+                      table_name=table_name,
+                      host='172.21.0.17')
     return result_lst
 
 
@@ -56,7 +59,7 @@ def get_user_id(user_home_page):
 
 def user_info(match_id,
               table_name='user_info',
-              host='localhost'):
+              host='172.21.0.17'):
 
     result_lst = []
     url = 'https://pubg.op.gg/api/matches/' + match_id
@@ -70,7 +73,6 @@ def user_info(match_id,
                                                      '%Y-%m-%d %H:%M:%S')
             user_name = line['user']['nickname']
             existance = existance_in_database(user_name)
-    
             if existance == 0:
                 user_home_page = line['user']['profile_url']
                 try:
@@ -78,6 +80,8 @@ def user_info(match_id,
                     user_info_dic = {'user_name': user_name,
                                      'user_id': user_id,
                                      'create_time': create_time}
+                    write_dic_into_database(data_dic=user_info_dic,
+                                            table_name='user_info')
                     print('got user_info %s' % user_name)
                     result_lst.append(user_info_dic)
                 except:
@@ -88,10 +92,6 @@ def user_info(match_id,
                     print("can't find %s user_id" % user_name)
             else:
                 print('%s already existed' % user_name)
-    if result_lst != []:
-        output_result(result_lst,
-                      table_name=table_name,
-                      host=host)
     return result_lst
 
 
