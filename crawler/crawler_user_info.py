@@ -9,6 +9,7 @@ import datetime
 from bs4 import BeautifulSoup
 from crawler_opgg.utils.retry_get_url import retry_get_url
 from crawler_opgg.utils.output_result import output_result
+from crawler_opgg.utils.user_info_existance import existance_in_database
 
 
 def get_season():
@@ -56,6 +57,7 @@ def get_user_id(user_home_page):
 def user_info(match_id,
               table_name='user_info',
               host='localhost'):
+
     result_lst = []
     url = 'https://pubg.op.gg/api/matches/' + match_id
     get_page = retry_get_url(url)
@@ -65,15 +67,20 @@ def user_info(match_id,
         user_lst = line['participants']
         for line in user_lst:
             user_name = line['user']['nickname']
-            user_home_page = line['user']['profile_url']
-            user_id = get_user_id(user_home_page)
-            create_time = datetime.datetime.strftime(datetime.datetime.now(), 
-                                                     '%Y-%m-%d %H:%M:%S')
-            user_info_dic = {'user_name': user_name,
-                             'user_id': user_id,
-                             'create_time': create_time}
-            print('got user_info %s' % user_name)
-            result_lst.append(user_info_dic)
+            existance = existance_in_database(user_name)
+
+            if existance == 0:
+                user_home_page = line['user']['profile_url']
+                user_id = get_user_id(user_home_page)
+                create_time = datetime.datetime.strftime(datetime.datetime.now(), 
+                                                         '%Y-%m-%d %H:%M:%S')
+                user_info_dic = {'user_name': user_name,
+                                 'user_id': user_id,
+                                 'create_time': create_time}
+                print('got user_info %s' % user_name)
+                result_lst.append(user_info_dic)
+            else:
+                print('%s already existed' % user_name)
 
     if result_lst != []:
         output_result(result_lst,

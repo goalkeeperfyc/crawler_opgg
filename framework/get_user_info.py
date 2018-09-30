@@ -34,7 +34,7 @@ for line in data_lst:
     match_id = line['match_id']
     user_info(match_id=match_id,
               host=args.host)
-    updata_sql = "updata match_info set used=1 where id=" + str(record_id)
+    updata_sql = "update match_info set used=1 where id=" + str(record_id)
     cursor.execute(updata_sql)
     connection.commit()
     

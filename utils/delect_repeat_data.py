@@ -29,10 +29,10 @@ for line in test_lst:
         new_lst.append(line)
         user_id_lst.append(line['user_id'])
 
-delect_sql = "delect from user_info where id >= 1"
+delect_sql = "delete from user_info where id >= 1"
 cursor.execute(delect_sql)
 connection.commit()
 
-write_lst_into_database(data_lst=test_lst,
+write_lst_into_database(data_lst=new_lst,
                         table_name='user_info',
                         host='172.21.0.17')
