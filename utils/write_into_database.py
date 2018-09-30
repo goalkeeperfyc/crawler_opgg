@@ -28,7 +28,7 @@ def write_dic_into_database(data_dic,
     write_into_sql = make_up_replace_sql(table_name=table_name, input_dic=data_dic)
     cursor.execute(write_into_sql)
     connection.commit()
-    print('write %s into database' % data_dic['ip_address'])
+    print('write %s into database' % data_dic['user_name'])
 
 
 def write_lst_into_database(data_lst, 

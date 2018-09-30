@@ -10,7 +10,7 @@ from bs4 import BeautifulSoup
 from crawler_opgg.utils.retry_get_url import retry_get_url
 from crawler_opgg.utils.output_result import output_result
 from crawler_opgg.utils.user_info_existance import existance_in_database
-
+from crawler_opgg.utils.write_into_database import write_dic_into_database
 
 def get_season():
     return datetime.datetime.strftime(datetime.datetime.now(), '%Y-%m')
@@ -66,22 +66,28 @@ def user_info(match_id,
     for line in user_info_lst:
         user_lst = line['participants']
         for line in user_lst:
+            create_time = datetime.datetime.strftime(datetime.datetime.now(), 
+                                                     '%Y-%m-%d %H:%M:%S')
             user_name = line['user']['nickname']
             existance = existance_in_database(user_name)
-
+    
             if existance == 0:
                 user_home_page = line['user']['profile_url']
-                user_id = get_user_id(user_home_page)
-                create_time = datetime.datetime.strftime(datetime.datetime.now(), 
-                                                         '%Y-%m-%d %H:%M:%S')
-                user_info_dic = {'user_name': user_name,
-                                 'user_id': user_id,
-                                 'create_time': create_time}
-                print('got user_info %s' % user_name)
-                result_lst.append(user_info_dic)
+                try:
+                    user_id = get_user_id(user_home_page)
+                    user_info_dic = {'user_name': user_name,
+                                     'user_id': user_id,
+                                     'create_time': create_time}
+                    print('got user_info %s' % user_name)
+                    result_lst.append(user_info_dic)
+                except:
+                    user_info_dic = {'user_name': user_name,
+                                     'create_time': create_time}
+                    write_dic_into_database(data_dic=user_info_dic,
+                                            table_name='no_user_id')
+                    print("can't find %s user_id" % user_name)
             else:
                 print('%s already existed' % user_name)
-
     if result_lst != []:
         output_result(result_lst,
                       table_name=table_name,
