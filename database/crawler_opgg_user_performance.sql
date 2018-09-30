@@ -20,11 +20,11 @@
 --
 
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+ SET character_set_client = utf8 ;
 CREATE TABLE `crawler_opgg`.`user_performance` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `user_name` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
-  `opgg_id` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `user_name` varchar(45)  DEFAULT NULL,
+  `opgg_id` varchar(45)  DEFAULT NULL,
   `creat_time` DATETIME DEFAULT NULL,
   `solo_chicken` int(11) DEFAULT NULL,
   `solo_damage_per_match` float DEFAULT NULL,
