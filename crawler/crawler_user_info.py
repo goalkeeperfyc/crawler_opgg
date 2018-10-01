@@ -28,7 +28,10 @@ def match_id(user_name,
     soup = BeautifulSoup(page, 'html.parser')
     match_lst = soup.find_all('li', {'data-selector': 'total-played-game-item'})
     for line in match_lst:
-        match_id = line.find('div', {'class': 'matches-item__column matches-item__column--team'}).div['data-u-id']
+        try:
+            match_id = line.find('div', {'class': 'matches-item__column matches-item__column--team'}).div['data-u-id']
+        except:
+            match_id = line.find('div', {'data-selector': 'kill-log-container'})['data-u-match_id']
         create_time = datetime.datetime.strftime(datetime.datetime.now(), 
                                                  '%Y-%m-%d %H:%M:%S')
         match_info = {'create_time': create_time,
@@ -49,7 +52,7 @@ def match_id(user_name,
 
 
 def get_user_id(user_home_page):
-    get_page = retry_get_url(user_home_page)
+    get_page = retry_get_url(user_home_page, timeout=8)
     get_page.encoding = 'utf-8'
     page = get_page.text
     soup = BeautifulSoup(page, 'html.parser')

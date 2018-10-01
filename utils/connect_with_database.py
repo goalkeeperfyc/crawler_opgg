@@ -107,3 +107,22 @@ def write_lst_into_database(data_lst, table_name, database_name='crawler_opgg',
 
     connection.commit()
     print('write %s records of data into database' % length)
+
+
+def general_update_status(record_id,
+                          update_sql,
+                          host='172.21.0.17',
+                          user='root',
+                          passwd='goalkeeper@1', 
+                          database_name='proxy_pool',):
+    """
+    update status to figure out which record is tested
+    """
+    connection = pymysql.connect(host=host, user=user, passwd=passwd,
+                                 db=database_name, port=3306,
+                                 cursorclass=pymysql.cursors.DictCursor)
+    cursor = connection.cursor()
+    update_time = datetime.datetime.strftime(datetime.datetime.now(), '%Y-%m-%d %H:%M:%S')
+    cursor.execute(update_sql)
+    connection.commit()
+    print('success commit record_id=%s' % record_id)
