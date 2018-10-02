@@ -65,6 +65,7 @@ def dic_lst_to_file(lst_name, file_name):
         file.write('\n')
     file.flush()
     file.close()
+    print('wrote %s data into file' % len(lst_name))
 
 
 def str_lst_to_file(listname, filename):

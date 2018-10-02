@@ -12,13 +12,14 @@ def extract_data(search_sql,
                  host='172.21.0.17',
                  user='root',
                  passwd='goalkeeper@1', 
-                 database_name='crawler_opgg'):
+                 database_name='crawler_opgg',
+                 port=3306):
 
     """
     extract data from mysql
     """
     connection = pymysql.connect(host=host, user=user, passwd=passwd,
-                                 db=database_name, port=3306,
+                                 db=database_name, port=port,
                                  cursorclass=pymysql.cursors.DictCursor)
     cursor = connection.cursor()
     cursor.execute(search_sql)

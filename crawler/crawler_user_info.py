@@ -11,6 +11,20 @@ from crawler_opgg.utils.retry_get_url import retry_get_url
 from crawler_opgg.utils.output_result import output_result
 from crawler_opgg.utils.user_info_existance import existance_in_database
 from crawler_opgg.utils.write_into_database import write_dic_into_database
+from crawler_opgg.utils.write_into_mysql import write_dic_into_mysql
+
+
+
+headers = {'Host': 'pubg.op.gg',
+           'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:62.0) Gecko/20100101 Firefox/62.0',
+           'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+           'Accept-Language': 'zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2',
+           'Accept-Encoding': 'gzip, deflate, br',
+           'Connection': 'keep-alive',
+           'Upgrade-Insecure-Requests': '1',
+           'Cache-Control': 'max-age=0',
+           'TE': 'Trailers'}
+
 
 def get_season():
     return datetime.datetime.strftime(datetime.datetime.now(), '%Y-%m')
@@ -61,6 +75,7 @@ def get_user_id(user_home_page):
 
 
 def user_info(match_id,
+              write_into_db=True,
               table_name='user_info',
               host='172.21.0.17'):
 
@@ -83,16 +98,20 @@ def user_info(match_id,
                     user_info_dic = {'user_name': user_name,
                                      'user_id': user_id,
                                      'create_time': create_time}
-                    write_dic_into_database(data_dic=user_info_dic,
-                                            table_name='user_info')
+
                     print('got user_info %s' % user_name)
                     result_lst.append(user_info_dic)
+                    if write_into_db == True:
+                        write_dic_into_mysql(data_dic=user_info_dic,
+                                                table_name='user_info')
                 except:
                     user_info_dic = {'user_name': user_name,
                                      'create_time': create_time}
-                    write_dic_into_database(data_dic=user_info_dic,
-                                            table_name='no_user_id')
+                    result_lst.append(user_info_dic)
                     print("can't find %s user_id" % user_name)
+                    if write_into_db == True:
+                        write_dic_into_mysql(data_dic=user_info_dic,
+                                                table_name='no_user_id')
             else:
                 print('%s already existed' % user_name)
     return result_lst
@@ -113,11 +132,13 @@ def process_one_line(page_cate, process_dic):
 
 
 def user_performance(user_id,
-              season='2018-09',
-              server='pc-as',
-              mode='tpp'):
+                     season='2018-09',
+                     server='pc-as',
+                     mode='tpp',
+                     write_into_db=True):
     """
-    focus on tpp mode, may
+    tpp mode, server pc-as, season 2018-09
+    headers is required because it will return wrong data without headers
     """
     solo_page = ('https://pubg.op.gg/api/users/' + user_id + 
                  '/ranked-stats?season=' + season + 
@@ -128,28 +149,61 @@ def user_performance(user_id,
     square_page = ('https://pubg.op.gg/api/users/' + user_id + 
                    '/ranked-stats?season=' + season + 
                    '&server=' + server + '&queue_size=4&mode=' + mode)
-    get_page = retry_get_url(solo_page)
+    get_page = retry_get_url(solo_page, headers=headers)
     page_dic = get_page.json()
     if len(page_dic) > 3:
         solo_dic = process_one_line(page_cate='solo', process_dic=page_dic)
     else:
         print("can't not get user_info solo page")
         solo_dic = {}
-    get_page = retry_get_url(double_page)
+    get_page = retry_get_url(double_page, headers=headers)
     page_dic = get_page.json()
     if len(page_dic) > 3:
         double_dic = process_one_line(page_cate='double', process_dic=page_dic)
     else:
-        print("can't not get user_info solo page")
+        print("can't not get user_info double page")
         double_dic = {}
     solo_double_dic = dict(solo_dic, **double_dic)
-    get_page = retry_get_url(square_page)
+    get_page = retry_get_url(square_page, headers=headers)
     page_dic = get_page.json()
     if len(page_dic) > 3:
         square_dic = process_one_line(page_cate='square', process_dic=page_dic)
     else:
-        print("can't not get user_info solo page")
+        print("can't not get user_info square page")
         square_dic = {}
     user_info_dic = dict(solo_double_dic, **square_dic)
+    user_info_dic['create_time'] =  datetime.datetime.strftime(datetime.datetime.now(), 
+                                                               '%Y-%m-%d %H:%M:%S')
+    user_info_dic['season'] = season
+    user_info_dic['mode'] = mode
+    if write_into_db == True:
+        write_dic_into_mysql(data_dic=user_info_dic,
+                             table_name='user_performance')
     return user_info_dic
 
+def user_info_at_localhost(match_id):
+    result_lst = []
+    url = 'https://pubg.op.gg/api/matches/' + match_id
+    get_page = retry_get_url(url)
+    page_dic = get_page.json()
+    user_info_lst = page_dic['teams']
+    for line in user_info_lst:
+        user_lst = line['participants']
+        for line in user_lst:
+            create_time = datetime.datetime.strftime(datetime.datetime.now(), 
+                                                     '%Y-%m-%d %H:%M:%S')
+            user_name = line['user']['nickname']
+            user_home_page = line['user']['profile_url']
+            try:
+                user_id = get_user_id(user_home_page)
+                user_info_dic = {'user_name': user_name,
+                                 'user_id': user_id,
+                                 'create_time': create_time}
+
+                print('got user_info %s' % user_name)
+                result_lst.append(user_info_dic)
+            except:
+                user_info_dic = {'user_name': user_name,
+                                 'create_time': create_time}
+                result_lst.append(user_info_dic)
+    return result_lst
