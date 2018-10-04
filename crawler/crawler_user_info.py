@@ -176,6 +176,12 @@ def user_performance(user_id,
                                                                '%Y-%m-%d %H:%M:%S')
     user_info_dic['season'] = season
     user_info_dic['mode'] = mode
+    if solo_dic != {} and user_info_dic['solo_rating'] is None:
+        user_info_dic['solo_rating'] = 0
+    if double_dic != {} and user_info_dic['double_rating'] is None:
+        user_info_dic['double_rating'] = 0
+    if square_dic != {} and user_info_dic['square_rating'] is None:
+        user_info_dic['square_rating'] = 0
     if write_into_db == True:
         write_dic_into_mysql(data_dic=user_info_dic,
                              table_name='user_performance')

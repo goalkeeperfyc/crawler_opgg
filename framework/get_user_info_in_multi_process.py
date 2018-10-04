@@ -25,7 +25,7 @@ parser.add_argument('-host', '--host', default='172.21.0.17', type=str,
                     help=('host of the database writing data into'))
 parser.add_argument('-sql', '--sql', default="select * from match_info where used=0", type=str,
                     help=('set search_sql to extract data'))
-parser.add_argument('-sum', '--sum', default=None, type=str,
+parser.add_argument('-sum', '--sum', default=None, type=int,
                     help=('the number of match_id extract from database'))
 
 args = parser.parse_args()
@@ -37,7 +37,7 @@ print('totally found %s matches' % len(data_lst))
 for line in data_lst:
     record_id = line['id']
     match_id = line['match_id']
-    process = multiprocessing.Process(targer=user_info, args=(match_id, ))
+    process = multiprocessing.Process(target=user_info, args=(match_id, ))
     process.start()
     updata_sql = "update match_info set used=1 where id=" + str(record_id)
     cursor.execute(updata_sql)

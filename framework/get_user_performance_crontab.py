@@ -12,8 +12,9 @@ from crawler_opgg.crawler.crawler_user_info import user_performance
 
 parser = argparse.ArgumentParser(description='get user performance by user id')
 
-parser.add_argument('-s', '--sql',default='select * from user_info where used=0',
-                   type=str, help=('search sql'))
+parser.add_argument('-sql', '--sql',
+                    default='select * from user_info where used=0 order by create_time desc',
+                    type=str, help=('search sql'))
 
 args = parser.parse_args()
 
