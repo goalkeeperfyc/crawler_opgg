@@ -7,10 +7,9 @@ Created on Sat Sep 29 11:20:27 2018
 
 import argparse
 import pymysql
-from crawler_opgg.crawler.crawler_user_info import user_info
-from crawler_opgg.utils.extract_from_database import extract_data
-from crawler_opgg.utils.update_status_in_mysql import update_status
 from multiprocessing import Pool
+from crawler_opgg.utils.extract_from_database import extract_data
+from crawler_opgg.utils.get_data_and_update_status import get_info_and_update_status
 
 connection = pymysql.connect(host='172.21.0.17', user='root', passwd='goalkeeper@1',
                                  db='crawler_opgg', port=3306,
@@ -35,14 +34,6 @@ data_lst = extract_data(search_sql=args.sql,
 print('totally found %s matches' % len(data_lst))
 
 pool = Pool(args.process)
-
-def get_info_and_update_status(match_info_dic):
-    record_id = match_info_dic['id']
-    update_sql = "update match_info set used=1 where id=" + str(record_id)
-    update_status(update_sql)
-    print('update success %s' % match_info_dic['match_id'])
-    match_id = match_info_dic['match_id']
-    user_info(match_id)
 
 for line in data_lst:
     pool.apply_async(get_info_and_update_status, args=(line, ))
