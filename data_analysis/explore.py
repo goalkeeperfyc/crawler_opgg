@@ -13,6 +13,15 @@ data_lst = extract_data(search_sql, host='cdb-1y1l8q6e.bj.tencentcdb.com',
                         port=10037)
 
 for line in data_lst:
+    line['play_times'] = line['solo_play_times'] + line['double_play_times'] + line['square_play_times']
+
+task_lst = []
+
+for line in data_lst:
+    if line['play_times'] >= 10:
+        task_lst.append(line)
+
+for line in data_lst:
     try:
         line['headshot_per_4'] = line['square_headshot_kills_sum']/line['square_kills_sum']
     except:
