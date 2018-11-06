@@ -5,15 +5,20 @@ Created on Sat Sep 29 11:20:27 2018
 @author: fangyucheng
 """
 
+
 import argparse
 import pymysql
 from multiprocessing import Pool
 from crawler_opgg.utils.extract_from_database import extract_data
 from crawler_opgg.utils.get_data_and_update_status import get_info_and_update_status
 
-connection = pymysql.connect(host='172.21.0.17', user='root', passwd='goalkeeper@1',
-                                 db='crawler_opgg', port=3306,
-                                 cursorclass=pymysql.cursors.DictCursor)
+
+connection = pymysql.connect(host='cdb-1y1l8q6e.bj.tencentcdb.com',
+                             user='root',
+                             passwd='goalkeeper@1',
+                             db='crawler_opgg',
+                             port=10037,
+                             cursorclass=pymysql.cursors.DictCursor)
 cursor = connection.cursor()
 
 parser = argparse.ArgumentParser(description='input variable')
@@ -36,7 +41,7 @@ print('totally found %s matches' % len(data_lst))
 pool = Pool(args.process)
 
 for line in data_lst:
-    pool.apply_async(get_info_and_update_status, args=(line, ))
+    pool.map_async(get_info_and_update_status, args=(line, ))
 
 pool.close()
 pool.join()
