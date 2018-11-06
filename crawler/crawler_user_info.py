@@ -10,7 +10,6 @@ from bs4 import BeautifulSoup
 from crawler_opgg.utils.retry_get_url import retry_get_url
 from crawler_opgg.utils.output_result import output_result
 from crawler_opgg.utils.user_info_existance import existance_in_database
-from crawler_opgg.utils.write_into_database import write_dic_into_database
 from crawler_opgg.utils.write_into_mysql import write_dic_into_mysql
 
 
