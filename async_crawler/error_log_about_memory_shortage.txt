@@ -1,0 +1,166 @@
+Nov  7 18:58:22 VM_0_4_centos kernel: python3 invoked oom-killer: gfp_mask=0x201da, order=0, oom_score_adj=0
+Nov  7 18:58:22 VM_0_4_centos kernel: python3 cpuset=/ mems_allowed=0
+Nov  7 18:58:22 VM_0_4_centos kernel: CPU: 0 PID: 23185 Comm: python3 Kdump: loaded Not tainted 3.10.0-862.el7.x86_64 #1
+Nov  7 18:58:22 VM_0_4_centos kernel: Hardware name: Bochs Bochs, BIOS Bochs 01/01/2011
+Nov  7 18:58:22 VM_0_4_centos kernel: Call Trace:
+Nov  7 18:58:22 VM_0_4_centos kernel: [<ffffffffabd0d768>] dump_stack+0x19/0x1b
+Nov  7 18:58:22 VM_0_4_centos kernel: [<ffffffffabd090ea>] dump_header+0x90/0x229
+Nov  7 18:58:22 VM_0_4_centos kernel: [<ffffffffab6f76e2>] ? ktime_get_ts64+0x52/0xf0
+Nov  7 18:58:22 VM_0_4_centos kernel: [<ffffffffab74e0bf>] ? delayacct_end+0x8f/0xb0
+Nov  7 18:58:22 VM_0_4_centos kernel: [<ffffffffc040171a>] ? virtballoon_oom_notify+0x2a/0x70 [virtio_balloon]
+Nov  7 18:58:22 VM_0_4_centos kernel: [<ffffffffab797904>] oom_kill_process+0x254/0x3d0
+Nov  7 18:58:22 VM_0_4_centos kernel: [<ffffffffab7973ad>] ? oom_unkillable_task+0xcd/0x120
+Nov  7 18:58:22 VM_0_4_centos kernel: [<ffffffffab797456>] ? find_lock_task_mm+0x56/0xc0
+Nov  7 18:58:22 VM_0_4_centos kernel: [<ffffffffab798146>] out_of_memory+0x4b6/0x4f0
+Nov  7 18:58:22 VM_0_4_centos kernel: [<ffffffffab79ea64>] __alloc_pages_nodemask+0xaa4/0xbb0
+Nov  7 18:58:22 VM_0_4_centos kernel: [<ffffffffab7e8528>] alloc_pages_current+0x98/0x110
+Nov  7 18:58:22 VM_0_4_centos kernel: [<ffffffffab793cf7>] __page_cache_alloc+0x97/0xb0
+Nov  7 18:58:22 VM_0_4_centos kernel: [<ffffffffab7963f8>] filemap_fault+0x298/0x490
+Nov  7 18:58:22 VM_0_4_centos kernel: [<ffffffffc0365e66>] ext4_filemap_fault+0x36/0x50 [ext4]
+Nov  7 18:58:22 VM_0_4_centos kernel: [<ffffffffab7c05fa>] __do_fault.isra.58+0x8a/0x100
+Nov  7 18:58:22 VM_0_4_centos kernel: [<ffffffffab7c0b5c>] do_read_fault.isra.60+0x4c/0x1a0
+Nov  7 18:58:22 VM_0_4_centos kernel: [<ffffffffab7c52dc>] handle_pte_fault+0x2dc/0xc30
+Nov  7 18:58:22 VM_0_4_centos kernel: [<ffffffffab7c747d>] handle_mm_fault+0x39d/0x9b0
+Nov  7 18:58:22 VM_0_4_centos kernel: [<ffffffffabd1a597>] __do_page_fault+0x197/0x4f0
+Nov  7 18:58:22 VM_0_4_centos kernel: [<ffffffffabd1a925>] do_page_fault+0x35/0x90
+Nov  7 18:58:22 VM_0_4_centos kernel: [<ffffffffabd16ab6>] ? error_swapgs+0xa7/0xbd
+Nov  7 18:58:22 VM_0_4_centos kernel: [<ffffffffabd16768>] page_fault+0x28/0x30
+Nov  7 18:58:22 VM_0_4_centos kernel: Mem-Info:
+Nov  7 18:58:22 VM_0_4_centos kernel: active_anon:419921 inactive_anon:105 isolated_anon:0#012 active_file:237 inactive_file:3840 isolated_file:0#012 unevictable:0 dirty:0 writeback:0 unstable:0#012 slab_reclaimable:11682 slab_unreclaimable:5189#012 mapped:256 shmem:224 pagetables:8376 bounce:0#012 free:13073 free_pcp:30 free_cma:0
+Nov  7 18:58:22 VM_0_4_centos kernel: Node 0 DMA free:7656kB min:380kB low:472kB high:568kB active_anon:7500kB inactive_anon:0kB active_file:0kB inactive_file:0kB unevictable:0kB isolated(anon):0kB isolated(file):0kB present:15992kB managed:15908kB mlocked:0kB dirty:0kB writeback:0kB mapped:0kB shmem:0kB slab_reclaimable:344kB slab_unreclaimable:184kB kernel_stack:16kB pagetables:92kB unstable:0kB bounce:0kB free_pcp:0kB local_pcp:0kB free_cma:0kB writeback_tmp:0kB pages_scanned:0 all_unreclaimable? yes
+Nov  7 18:58:22 VM_0_4_centos kernel: lowmem_reserve[]: 0 1819 1819 1819
+Nov  7 18:58:22 VM_0_4_centos kernel: Node 0 DMA32 free:44636kB min:44672kB low:55840kB high:67008kB active_anon:1672184kB inactive_anon:420kB active_file:948kB inactive_file:15360kB unevictable:0kB isolated(anon):0kB isolated(file):0kB present:2080760kB managed:1866984kB mlocked:0kB dirty:0kB writeback:0kB mapped:1024kB shmem:896kB slab_reclaimable:46384kB slab_unreclaimable:20572kB kernel_stack:2688kB pagetables:33412kB unstable:0kB bounce:0kB free_pcp:120kB local_pcp:120kB free_cma:0kB writeback_tmp:0kB pages_scanned:1712 all_unreclaimable? yes
+Nov  7 18:58:22 VM_0_4_centos kernel: lowmem_reserve[]: 0 0 0 0
+Nov  7 18:58:22 VM_0_4_centos kernel: Node 0 DMA: 10*4kB (UEM) 6*8kB (EM) 19*16kB (UEM) 9*32kB (E) 5*64kB (E) 4*128kB (E) 4*256kB (UEM) 4*512kB (UEM) 3*1024kB (UE) 0*2048kB 0*4096kB = 7656kB
+Nov  7 18:58:22 VM_0_4_centos kernel: Node 0 DMA32: 139*4kB (EM) 922*8kB (UEM) 836*16kB (UEM) 363*32kB (UEM) 125*64kB (UEM) 29*128kB (UEM) 0*256kB 0*512kB 0*1024kB 0*2048kB 0*4096kB = 44636kB
+Nov  7 18:58:22 VM_0_4_centos kernel: Node 0 hugepages_total=0 hugepages_free=0 hugepages_surp=0 hugepages_size=2048kB
+Nov  7 18:58:22 VM_0_4_centos kernel: 4323 total pagecache pages
+Nov  7 18:58:22 VM_0_4_centos kernel: 0 pages in swap cache
+Nov  7 18:58:22 VM_0_4_centos kernel: Swap cache stats: add 0, delete 0, find 0/0
+Nov  7 18:58:22 VM_0_4_centos kernel: Free swap  = 0kB
+Nov  7 18:58:22 VM_0_4_centos kernel: Total swap = 0kB
+Nov  7 18:58:22 VM_0_4_centos kernel: 524188 pages RAM
+Nov  7 18:58:22 VM_0_4_centos kernel: 0 pages HighMem/MovableOnly
+Nov  7 18:58:22 VM_0_4_centos kernel: 53465 pages reserved
+Nov  7 18:58:22 VM_0_4_centos kernel: [ pid ]   uid  tgid total_vm      rss nr_ptes swapents oom_score_adj name
+Nov  7 18:58:22 VM_0_4_centos kernel: [  328]     0   328    46699      107      94        0             0 systemd-journal
+Nov  7 18:58:22 VM_0_4_centos kernel: [  346]     0   346    11121      185      24        0         -1000 systemd-udevd
+Nov  7 18:58:22 VM_0_4_centos kernel: [  348]     0   348    29149       77      26        0             0 lvmetad
+Nov  7 18:58:22 VM_0_4_centos kernel: [  470]     0   470    13877      114      28        0         -1000 auditd
+Nov  7 18:58:22 VM_0_4_centos kernel: [  503]   998   503     2144       37      10        0             0 lsmd
+Nov  7 18:58:22 VM_0_4_centos kernel: [  504]    81   504    15076      176      35        0          -900 dbus-daemon
+Nov  7 18:58:22 VM_0_4_centos kernel: [  506]   999   506   161205     2096      63        0             0 polkitd
+Nov  7 18:58:23 VM_0_4_centos kernel: [  509]     0   509     6594       82      18        0             0 systemd-logind
+Nov  7 18:58:23 VM_0_4_centos kernel: [  515]     0   515     1096       34       8        0             0 acpid
+Nov  7 18:58:23 VM_0_4_centos kernel: [  518]    38   518    12330      177      30        0             0 ntpd
+Nov  7 18:58:23 VM_0_4_centos kernel: [  535]     0   535   147336    13312      74        0             0 YDService
+Nov  7 18:58:23 VM_0_4_centos kernel: [  729]     0   729     6476       53      18        0             0 atd
+Nov  7 18:58:23 VM_0_4_centos kernel: [  804]     0   804    26845      498      52        0             0 dhclient
+Nov  7 18:58:23 VM_0_4_centos kernel: [  882]     0   882   143975     2761      98        0             0 tuned
+Nov  7 18:58:23 VM_0_4_centos kernel: [  884]     0   884   184543      474     207        0             0 rsyslogd
+Nov  7 18:58:23 VM_0_4_centos kernel: [  969]     0   969    27522       34      10        0             0 agetty
+Nov  7 18:58:23 VM_0_4_centos kernel: [  970]     0   970    27522       33      12        0             0 agetty
+Nov  7 18:58:23 VM_0_4_centos kernel: [ 1310]     0  1310    28199      255      56        0         -1000 sshd
+Nov  7 18:58:23 VM_0_4_centos kernel: [ 1330]     0  1330    24335       94      18        0             0 sgagent
+Nov  7 18:58:23 VM_0_4_centos kernel: [ 1343]     0  1343    38816     1626      31        0             0 barad_agent
+Nov  7 18:58:23 VM_0_4_centos kernel: [ 1348]     0  1348    39542     1820      32        0             0 barad_agent
+Nov  7 18:58:23 VM_0_4_centos kernel: [ 1349]     0  1349   185329     2496      53        0             0 barad_agent
+Nov  7 18:58:23 VM_0_4_centos kernel: [ 1367]     0  1367    25248      101      19        0             0 YDLive
+Nov  7 18:58:23 VM_0_4_centos kernel: [25269]     0 25269    46208      341      49        0             0 crond
+Nov  7 18:58:23 VM_0_4_centos kernel: [25270]     0 25270   219011    21983     198        0             0 python3
+Nov  7 18:58:23 VM_0_4_centos kernel: [25305]     0 25305   218031    21851     168        0             0 python3
+Nov  7 18:58:23 VM_0_4_centos kernel: [25306]     0 25306   218095    21937     168        0             0 python3
+Nov  7 18:58:23 VM_0_4_centos kernel: [25307]     0 25307   218095    21918     168        0             0 python3
+Nov  7 18:58:23 VM_0_4_centos kernel: [25308]     0 25308   218095    21919     168        0             0 python3
+Nov  7 18:58:23 VM_0_4_centos kernel: [25309]     0 25309   218095    21924     168        0             0 python3
+Nov  7 18:58:23 VM_0_4_centos kernel: [25310]     0 25310   218031    21859     168        0             0 python3
+Nov  7 18:58:23 VM_0_4_centos kernel: [25311]     0 25311   218031    21854     168        0             0 python3
+Nov  7 18:58:23 VM_0_4_centos kernel: [25312]     0 25312   218031    20355     165        0             0 python3
+Nov  7 18:58:23 VM_0_4_centos kernel: [30035]     0 30035    46102      234      47        0             0 crond
+Nov  7 18:58:23 VM_0_4_centos kernel: [30036]  1000 30036   159482    17055     184        0             0 python3
+Nov  7 18:58:23 VM_0_4_centos kernel: [21470]     0 21470    31579      168      21        0             0 crond
+Nov  7 18:58:23 VM_0_4_centos kernel: [13715]     0 13715    46111      242      47        0             0 crond
+Nov  7 18:58:23 VM_0_4_centos kernel: [13716]  1000 13716   159802    17379     185        0             0 python3
+Nov  7 18:58:23 VM_0_4_centos kernel: [25610]     0 25610    46210      343      47        0             0 crond
+Nov  7 18:58:23 VM_0_4_centos kernel: [25611]  1000 25611   212070    15037     179        0             0 python3
+Nov  7 18:58:23 VM_0_4_centos kernel: [25626]  1000 25626   168218    24917     171        0             0 python3
+Nov  7 18:58:23 VM_0_4_centos kernel: [13267]     0 13267    46210      343      47        0             0 crond
+Nov  7 18:58:23 VM_0_4_centos kernel: [13269]  1000 13269   210463    13380     181        0             0 python3
+Nov  7 18:58:23 VM_0_4_centos kernel: [13297]  1000 13297   163800    20440     167        0             0 python3
+Nov  7 18:58:23 VM_0_4_centos kernel: [13298]  1000 13298   163291    20026     167        0             0 python3
+Nov  7 18:58:23 VM_0_4_centos kernel: [13299]  1000 13299   162628    19353     165        0             0 python3
+Nov  7 18:58:23 VM_0_4_centos kernel: [13300]  1000 13300   163325    19963     168        0             0 python3
+Nov  7 18:58:23 VM_0_4_centos kernel: [13301]  1000 13301   163107    19842     167        0             0 python3
+Nov  7 18:58:23 VM_0_4_centos kernel: [13302]  1000 13302   163829    20528     167        0             0 python3
+Nov  7 18:58:23 VM_0_4_centos kernel: [13303]  1000 13303   162585    19318     167        0             0 python3
+Nov  7 18:58:23 VM_0_4_centos kernel: [13305]  1000 13305   163381    20108     167        0             0 python3
+Nov  7 18:58:23 VM_0_4_centos kernel: [ 7087]  1000  7087   217626    21354     170        0             0 python3
+Nov  7 18:58:23 VM_0_4_centos kernel: [22589]  1000 22589   217562    21000     169        0             0 python3
+Nov  7 18:58:23 VM_0_4_centos kernel: [30656]  1000 30656   217434    20731     169        0             0 python3
+Nov  7 18:58:23 VM_0_4_centos kernel: [30677]  1000 30677   217242    20084     168        0             0 python3
+Nov  7 18:58:23 VM_0_4_centos kernel: [13813]  1000 13813   217626    20099     166        0             0 python3
+Nov  7 18:58:23 VM_0_4_centos kernel: [22700]  1000 22700   212070    15084     151        0             0 python3
+Nov  7 18:58:23 VM_0_4_centos kernel: [22663]  1000 22663   212070    15084     151        0             0 python3
+Nov  7 18:58:23 VM_0_4_centos kernel: [28878]     0 28878    56005      480     112        0             0 httpd
+Nov  7 18:58:23 VM_0_4_centos kernel: [28879]    48 28879    56559      497     112        0             0 httpd
+Nov  7 18:58:23 VM_0_4_centos kernel: [28880]    48 28880    56559      495     112        0             0 httpd
+Nov  7 18:58:23 VM_0_4_centos kernel: [28881]    48 28881    56559      501     112        0             0 httpd
+Nov  7 18:58:23 VM_0_4_centos kernel: [28883]    48 28883    56559      488     112        0             0 httpd
+Nov  7 18:58:23 VM_0_4_centos kernel: [ 6431]    48  6431    56559      501     112        0             0 httpd
+Nov  7 18:58:23 VM_0_4_centos kernel: [25884]    48 25884    56559      489     112        0             0 httpd
+Nov  7 18:58:23 VM_0_4_centos kernel: [ 9159]    48  9159    56559      490     112        0             0 httpd
+Nov  7 18:58:23 VM_0_4_centos kernel: [ 9160]    48  9160    56559      491     112        0             0 httpd
+Nov  7 18:58:23 VM_0_4_centos kernel: [ 4679]    48  4679    56559      488     112        0             0 httpd
+Nov  7 18:58:23 VM_0_4_centos kernel: [ 4682]    48  4682    56559      488     112        0             0 httpd
+Nov  7 18:58:23 VM_0_4_centos kernel: [23004]     0 23004    39165      333      77        0             0 sshd
+Nov  7 18:58:23 VM_0_4_centos kernel: [23026]  1000 23026    39165      345      76        0             0 sshd
+Nov  7 18:58:23 VM_0_4_centos kernel: [23027]  1000 23027    29025      260      15        0             0 bash
+Nov  7 18:58:23 VM_0_4_centos kernel: [23156]  1000 23156    48480      149      52        0             0 su
+Nov  7 18:58:23 VM_0_4_centos kernel: [23162]     0 23162    29052      285      14        0             0 bash
+Nov  7 18:58:23 VM_0_4_centos kernel: [26742]     0 26742    39165      333      80        0             0 sshd
+Nov  7 18:58:23 VM_0_4_centos kernel: [26759]  1000 26759    39199      376      78        0             0 sshd
+Nov  7 18:58:23 VM_0_4_centos kernel: [26760]  1000 26760    18041      205      39        0             0 sftp-server
+Nov  7 18:58:23 VM_0_4_centos kernel: [31001]     0 31001    48454      147      51        0             0 su
+Nov  7 18:58:23 VM_0_4_centos kernel: [31002]  1000 31002    29020      257      15        0             0 bash
+Nov  7 18:58:23 VM_0_4_centos kernel: [18977]     0 18977    39165      332      78        0             0 sshd
+Nov  7 18:58:23 VM_0_4_centos kernel: [18980]  1000 18980    39198      364      78        0             0 sshd
+Nov  7 18:58:23 VM_0_4_centos kernel: [18981]  1000 18981    18041      224      39        0             0 sftp-server
+Nov  7 18:58:23 VM_0_4_centos kernel: [23108]  1000 23108   184574    25419     134        0             0 python3
+Nov  7 18:58:23 VM_0_4_centos kernel: [23185]  1000 23185    78306    11566      98        0             0 python3
+Nov  7 18:58:23 VM_0_4_centos kernel: Out of memory: Kill process 23108 (python3) score 54 or sacrifice child
+Nov  7 18:58:23 VM_0_4_centos kernel: Killed process 23108 (python3) total-vm:738296kB, anon-rss:101672kB, file-rss:4kB, shmem-rss:0kB
+Nov  7 18:59:02 VM_0_4_centos systemd: Started Session 65754 of user root.
+Nov  7 18:59:03 VM_0_4_centos systemd: Starting Session 65754 of user root.
+Nov  7 19:00:03 VM_0_4_centos systemd: Started Session 65755 of user root.
+Nov  7 19:00:05 VM_0_4_centos systemd: Starting Session 65755 of user root.
+Nov  7 19:01:02 VM_0_4_centos systemd: Started Session 65756 of user root.
+Nov  7 19:01:02 VM_0_4_centos systemd: Starting Session 65756 of user root.
+Nov  7 19:01:02 VM_0_4_centos systemd: Started Session 65757 of user root.
+Nov  7 19:01:02 VM_0_4_centos systemd: Starting Session 65757 of user root.
+Nov  7 19:02:01 VM_0_4_centos systemd: Started Session 65758 of user root.
+Nov  7 19:02:01 VM_0_4_centos systemd: Starting Session 65758 of user root.
+Nov  7 19:03:01 VM_0_4_centos systemd: Started Session 65759 of user root.
+Nov  7 19:03:01 VM_0_4_centos systemd: Starting Session 65759 of user root.
+Nov  7 19:04:01 VM_0_4_centos systemd: Started Session 65760 of user root.
+Nov  7 19:04:01 VM_0_4_centos systemd: Starting Session 65760 of user root.
+Nov  7 19:05:01 VM_0_4_centos systemd: Started Session 65761 of user root.
+Nov  7 19:05:01 VM_0_4_centos systemd: Starting Session 65761 of user root.
+Nov  7 19:06:01 VM_0_4_centos systemd: Started Session 65762 of user root.
+Nov  7 19:06:01 VM_0_4_centos systemd: Starting Session 65762 of user root.
+Nov  7 19:07:01 VM_0_4_centos systemd: Started Session 65763 of user root.
+Nov  7 19:07:01 VM_0_4_centos systemd: Starting Session 65763 of user root.
+Nov  7 19:08:01 VM_0_4_centos systemd: Started Session 65764 of user root.
+Nov  7 19:08:01 VM_0_4_centos systemd: Starting Session 65764 of user root.
+Nov  7 19:09:01 VM_0_4_centos systemd: Started Session 65765 of user root.
+Nov  7 19:09:01 VM_0_4_centos systemd: Starting Session 65765 of user root.
+Nov  7 19:09:36 VM_0_4_centos systemd: Started Session 65766 of user root.
+Nov  7 19:09:36 VM_0_4_centos systemd-logind: New session 65766 of user root.
+Nov  7 19:09:36 VM_0_4_centos systemd: Starting Session 65766 of user root.
+Nov  7 19:10:01 VM_0_4_centos systemd: Started Session 65768 of user root.
+Nov  7 19:10:01 VM_0_4_centos systemd: Starting Session 65768 of user root.
+Nov  7 19:10:01 VM_0_4_centos systemd: Started Session 65767 of user fangyucheng.
+Nov  7 19:10:01 VM_0_4_centos systemd: Starting Session 65767 of user fangyucheng.
+Nov  7 19:11:01 VM_0_4_centos systemd: Started Session 65769 of user root.
+Nov  7 19:11:01 VM_0_4_centos systemd: Starting Session 65769 of user root.
+Nov  7 19:12:01 VM_0_4_centos systemd: Started Session 65770 of user root.
+Nov  7 19:12:01 VM_0_4_centos systemd: Starting Session 65770 of user root.
