@@ -20,7 +20,6 @@ from crawler.crawler_sys.utils.output_results import output_result
 from crawler.crawler_sys.utils.trans_str_play_count_to_int import trans_play_count
 
 
-
 """
 '电影': 'http://v.qq.com/x/list/movie',
 '电视剧': 'http://v.qq.com/x/list/tv',
